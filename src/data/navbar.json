@@ -1,0 +1,20 @@
+{
+    "logo": {
+        "src": "assets/IMAGES/LOGO.png",
+        "alt": "MetaGames logo"
+    },
+    "cta": {
+        "text": "Join MetaGames",
+        "url": "#join"
+    },
+    "links": [
+        { "text": "Home", "url": "#home" },
+        { "text": "What Are MetaGames", "url": "#what-are" },
+        { "text": "News & Updates", "url": "#news" },
+        { "text": "Sports & Games", "url": "#sports-games" },
+        { "text": "Meta Movement", "url": "#meta-movement" },
+        { "text": "Emblem & Meaning", "url": "#emblem" },
+        { "text": "Official Theme Song", "url": "#theme-song" },
+        { "text": "Host Nations", "url": "#host-nations" }
+    ]
+}

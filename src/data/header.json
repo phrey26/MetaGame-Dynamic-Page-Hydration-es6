@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1,
+        "title": "MetaGames",
+        "colors": [
+            "bg-brand-green",
+            "bg-brand-blue",
+            "bg-brand-yellow",
+            "bg-brand-red",
+            "bg-white",
+            "bg-black"
+        ],
+        "scrollEffect": {
+            "hideOnScrollDown": true,
+            "revealThreshold": 72
+        }
+    }
+]

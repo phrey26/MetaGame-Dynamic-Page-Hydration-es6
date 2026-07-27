@@ -11,7 +11,7 @@
 <div id="site-header" class="sticky top-0 z-50">
   
   <div class="bg-[#0f172a] flex items-center h-8 relative border-b border-slate-800">
-    <div class="flex h-1.5 w-[30%] gap-1 pl-1 absolute left-0">
+    <div id="header-stripe-left" class="flex h-1.5 w-[30%] gap-1 pl-1 absolute left-0">
       <div class="flex-1 bg-blue-600"></div>
       <div class="flex-1 bg-yellow-400"></div>
       <div class="flex-1 bg-white"></div>
@@ -19,10 +19,10 @@
     </div>
     
     <div class="flex-1 text-center">
-      <h1 class="tracking-[0.4em] text-[15px] font-bold text-white uppercase">METAGAMES</h1>
+      <h1 id="header-title" class="tracking-[0.4em] text-[15px] font-bold text-white uppercase">METAGAMES</h1>
     </div>
 
-    <div class="flex h-1.5 w-[30%] gap-1 pr-1 absolute right-0">
+    <div id="header-stripe-right" class="flex h-1.5 w-[30%] gap-1 pr-1 absolute right-0">
       <div class="flex-1 bg-green-600"></div>
       <div class="flex-1 bg-blue-600"></div>
       <div class="flex-1 bg-yellow-400"></div>
@@ -34,22 +34,22 @@
   <nav class="bg-[#1e40af] text-white text-xs md:text-sm flex items-center justify-between px-4 sm:px-6 py-3 shadow-lg">
     
     <div class="flex items-center shrink-0">
-      <img src="assets/IMAGES/LOGO.png" class="h-14 sm:h-16 w-auto object-contain" alt="MetaGames logo">
+      <img data-nav-logo src="assets/IMAGES/LOGO.png" class="h-14 sm:h-16 w-auto object-contain" alt="MetaGames logo">
     </div>
 
-    <div class="hidden md:flex items-center gap-6 font-medium">
-      <a href="#home" class="font-semibold px-4 py-1.5 rounded-full hover:bg-white hover:text-slate-900 transition">Home</a>
-      <a href="#what-are" class="px-4 py-1.5 rounded-full hover:bg-white hover:text-slate-900 transition">What Are MetaGames</a>
-      <a href="#news" class="relative px-4 py-1.5 rounded-full hover:bg-white hover:text-slate-900 transition">News &amp; Updates <span class="text-red-500 absolute -top-1 -right-2 text-lg leading-none">&bull;</span></a>
-      <a href="#sports-games" class="px-4 py-1.5 rounded-full hover:bg-white hover:text-slate-900 transition">Sports &amp; Games</a>
-      <a href="#meta-movement" class="px-4 py-1.5 rounded-full hover:bg-white hover:text-slate-900 transition">Meta Movement</a>
-      <a href="#emblem" class="px-4 py-1.5 rounded-full hover:bg-white hover:text-slate-900 transition">Emblem &amp; Meaning</a>
-      <a href="#theme-song" class="px-4 py-1.5 rounded-full hover:bg-white hover:text-slate-900 transition">Official Theme Song</a>
-      <a href="#host-nations" class="px-4 py-1.5 rounded-full hover:bg-white hover:text-slate-900 transition">Host Nations</a>
+    <div id="navbar-desktop-links" class="hidden md:flex items-center gap-6 font-medium">
+      <a data-nav-index="0" href="#home" class="font-semibold px-4 py-1.5 rounded-full hover:bg-white hover:text-slate-900 transition"><span data-nav-text>Home</span></a>
+      <a data-nav-index="1" href="#what-are" class="px-4 py-1.5 rounded-full hover:bg-white hover:text-slate-900 transition"><span data-nav-text>What Are MetaGames</span></a>
+      <a data-nav-index="2" href="#news" class="relative px-4 py-1.5 rounded-full hover:bg-white hover:text-slate-900 transition"><span data-nav-text>News &amp; Updates</span> <span class="text-red-500 absolute -top-1 -right-2 text-lg leading-none">&bull;</span></a>
+      <a data-nav-index="3" href="#sports-games" class="px-4 py-1.5 rounded-full hover:bg-white hover:text-slate-900 transition"><span data-nav-text>Sports &amp; Games</span></a>
+      <a data-nav-index="4" href="#meta-movement" class="px-4 py-1.5 rounded-full hover:bg-white hover:text-slate-900 transition"><span data-nav-text>Meta Movement</span></a>
+      <a data-nav-index="5" href="#emblem" class="px-4 py-1.5 rounded-full hover:bg-white hover:text-slate-900 transition"><span data-nav-text>Emblem &amp; Meaning</span></a>
+      <a data-nav-index="6" href="#theme-song" class="px-4 py-1.5 rounded-full hover:bg-white hover:text-slate-900 transition"><span data-nav-text>Official Theme Song</span></a>
+      <a data-nav-index="7" href="#host-nations" class="px-4 py-1.5 rounded-full hover:bg-white hover:text-slate-900 transition"><span data-nav-text>Host Nations</span></a>
     </div>
 
     <div class="hidden sm:block shrink-0">
-      <a href="#join" class="bg-[#ef4444] hover:bg-red-600 transition text-white px-6 py-2 rounded-full font-bold shadow-md whitespace-nowrap">Join MetaGames</a>
+      <a data-nav-cta href="#join" class="bg-[#ef4444] hover:bg-red-600 transition text-white px-6 py-2 rounded-full font-bold shadow-md whitespace-nowrap"><span data-nav-cta-text>Join MetaGames</span></a>
     </div>
 
     <button id="mobile-menu-btn" class="md:hidden flex flex-col justify-center items-center gap-1.5 w-9 h-9 shrink-0" aria-label="Toggle menu" aria-expanded="false">
@@ -60,16 +60,16 @@
   </nav>
 
   <div id="mobile-menu" class="hidden md:hidden bg-[#1e3a8a] text-white text-sm shadow-lg">
-    <div class="flex flex-col divide-y divide-blue-800">
-      <a href="#home" class="px-5 py-3 font-semibold hover:bg-blue-800 transition">Home</a>
-      <a href="#what-are" class="px-5 py-3 hover:bg-blue-800 transition">What Are MetaGames</a>
-      <a href="#news" class="px-5 py-3 hover:bg-blue-800 transition">News &amp; Updates</a>
-      <a href="#sports-games" class="px-5 py-3 hover:bg-blue-800 transition">Sports &amp; Games</a>
-      <a href="#meta-movement" class="px-5 py-3 hover:bg-blue-800 transition">Meta Movement</a>
-      <a href="#emblem" class="px-5 py-3 hover:bg-blue-800 transition">Emblem &amp; Meaning</a>
-      <a href="#theme-song" class="px-5 py-3 hover:bg-blue-800 transition">Official Theme Song</a>
-      <a href="#host-nations" class="px-5 py-3 hover:bg-blue-800 transition">Host Nations</a>
-      <a href="#join" class="px-5 py-3 font-bold text-red-400 hover:bg-blue-800 transition">Join MetaGames</a>
+    <div id="navbar-mobile-links" class="flex flex-col divide-y divide-blue-800">
+      <a data-nav-index="0" href="#home" class="px-5 py-3 font-semibold hover:bg-blue-800 transition"><span data-nav-text>Home</span></a>
+      <a data-nav-index="1" href="#what-are" class="px-5 py-3 hover:bg-blue-800 transition"><span data-nav-text>What Are MetaGames</span></a>
+      <a data-nav-index="2" href="#news" class="px-5 py-3 hover:bg-blue-800 transition"><span data-nav-text>News &amp; Updates</span></a>
+      <a data-nav-index="3" href="#sports-games" class="px-5 py-3 hover:bg-blue-800 transition"><span data-nav-text>Sports &amp; Games</span></a>
+      <a data-nav-index="4" href="#meta-movement" class="px-5 py-3 hover:bg-blue-800 transition"><span data-nav-text>Meta Movement</span></a>
+      <a data-nav-index="5" href="#emblem" class="px-5 py-3 hover:bg-blue-800 transition"><span data-nav-text>Emblem &amp; Meaning</span></a>
+      <a data-nav-index="6" href="#theme-song" class="px-5 py-3 hover:bg-blue-800 transition"><span data-nav-text>Official Theme Song</span></a>
+      <a data-nav-index="7" href="#host-nations" class="px-5 py-3 hover:bg-blue-800 transition"><span data-nav-text>Host Nations</span></a>
+      <a data-nav-cta href="#join" class="px-5 py-3 font-bold text-red-400 hover:bg-blue-800 transition"><span data-nav-cta-text>Join MetaGames</span></a>
     </div>
   </div>
 </div>
@@ -79,7 +79,7 @@
 <section id="home" class="screen-section relative bg-[#0b1120] text-white flex flex-col justify-center items-center pt-8 pb-16 px-6">
   
   <div class="absolute inset-0 z-0">
-    <img src="https://placehold.co/1920x1080/1e293b/475569?text=Stadium+Crowd+Background" class="w-full h-full object-cover" alt="Stadium crowd background">
+    <img src="assets/IMAGES/25.png" class="w-full h-full object-cover" alt="Stadium crowd background">
     <div class="absolute inset-0 bg-gradient-to-b from-[#0b1120]/80 via-[#0b1120]/85 to-[#0b1120]"></div>
   </div>
 
@@ -491,6 +491,6 @@
   </div>
 </section>
 
-</div><script src="main.js"></script>
+</div><script type="module" src="js/app.js"></script>
 </body>
 </html>

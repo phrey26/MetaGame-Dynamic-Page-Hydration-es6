@@ -1,4 +1,21 @@
-document.addEventListener('DOMContentLoaded', () => {
+import {loadHeaderSection} from "./sections/header.js";
+import {loadNavbarSection} from "./sections/navbar.js";
+
+/**
+ * ---------------------------------------------------------------
+ * App bootstrap + shared page layout/behavior
+ * ---------------------------------------------------------------
+ * Header and navbar are fully self-contained sections (see
+ * ./sections/header.js and ./sections/navbar.js) — app.js just
+ * loads them, then handles everything else on the page: section
+ * sizing, carousels, the news feature, the emblem wheel, the
+ * lyrics scrollbar, and the marquee.
+ */
+
+document.addEventListener('DOMContentLoaded', async () => {
+
+  await loadHeaderSection();
+  await loadNavbarSection();
 
   const header = document.getElementById('site-header');
   const sections = document.querySelectorAll('.screen-section');
@@ -20,37 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('resize', sizeSections);
   if (window.visualViewport) {
     window.visualViewport.addEventListener('resize', sizeSections);
-  }
-
-
-  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-  const mobileMenu = document.getElementById('mobile-menu');
-
-  function closeMobileMenu() {
-    if (!mobileMenu) return;
-    mobileMenu.classList.add('hidden');
-    if (mobileMenuBtn) mobileMenuBtn.setAttribute('aria-expanded', 'false');
-  }
-
-  if (mobileMenuBtn && mobileMenu) {
-    mobileMenuBtn.addEventListener('click', () => {
-      const isOpen = !mobileMenu.classList.contains('hidden');
-      mobileMenu.classList.toggle('hidden');
-      mobileMenuBtn.setAttribute('aria-expanded', String(!isOpen));
-      sizeSections();
-    });
-
-    mobileMenu.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', () => {
-        closeMobileMenu();
-        sizeSections();
-      });
-    });
-
-
-    window.addEventListener('resize', () => {
-      if (window.innerWidth >= 768) closeMobileMenu();
-    });
   }
 
   const PAGE_TRACK_IDS = ['sg-track'];
