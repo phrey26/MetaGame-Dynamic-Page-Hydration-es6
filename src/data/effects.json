@@ -1,0 +1,15 @@
+{
+    "reveal": {
+        "threshold": 0.15,
+        "rootMargin": "0px 0px -10% 0px",
+        "defaultDistance": 32,
+        "defaultDuration": 700
+    },
+    "progressBar": {
+        "color": "#2563eb",
+        "height": 3
+    },
+    "tilt": {
+        "maxTilt": 8
+    }
+}
