@@ -67,25 +67,6 @@ function injectHeaderFxStyles() {
         animation: headerStripeGrow 0.6s ease both;
       }
 
-      /* Title reveals with a blur-in, then settles into a slow shimmer sweep */
-      @keyframes headerTitleReveal {
-        from { opacity: 0; filter: blur(4px); letter-spacing: -0.1em; }
-        to   { opacity: 1; filter: blur(0); letter-spacing: 0.4em; }
-      }
-      @keyframes headerTitleShimmer {
-        to { background-position: -200% center; }
-      }
-      #header-title.title-fx {
-        background-image: linear-gradient(90deg, #fff 0%, #93c5fd 25%, #fff 50%, #93c5fd 75%, #fff 100%);
-        background-size: 200% auto;
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-        animation:
-          headerTitleReveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) both,
-          headerTitleShimmer 6s linear 0.8s infinite;
-      }
-
       /* Header hides on scroll-down past the reveal threshold, and
          slides back the instant you scroll up — same element handles
          both breakpoints, so mobile and desktop get identical behavior
@@ -127,16 +108,14 @@ function renderHeader(payload) {
   const titleEl = document.getElementById('header-title');
   if (titleEl && config.title) {
     titleEl.textContent = config.title;
-    titleEl.classList.add('title-fx');
   }
 
   const colors = Array.isArray(config.colors) ? config.colors : [];
   if (colors.length) {
-    // Split the flag stripe evenly across the two accent bars flanking
-    // the title — data-driven, so it adapts if the color count changes.
-    const mid = Math.ceil(colors.length / 2);
-    buildStripe(document.getElementById('header-stripe-left'), colors.slice(0, mid));
-    buildStripe(document.getElementById('header-stripe-right'), colors.slice(mid));
+    // Mirror the full flag stripe on both sides of the title, so left
+    // and right accent bars show the exact same color sequence.
+    buildStripe(document.getElementById('header-stripe-left'), colors);
+    buildStripe(document.getElementById('header-stripe-right'), colors);
   }
 
   const scrollEffect = config.scrollEffect;
