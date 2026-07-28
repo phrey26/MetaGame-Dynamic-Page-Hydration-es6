@@ -1,5 +1,8 @@
 import {loadHeaderSection} from "./sections/header.js";
 import {loadNavbarSection} from "./sections/navbar.js";
+import {loadScrollReveal} from "./effects/scroll-reveal.js";
+import {loadInteractiveFx} from "./effects/interactive-fx.js";
+import {loadPageProgress} from "./effects/page-progress.js";
 
 /**
  * ---------------------------------------------------------------
@@ -9,13 +12,22 @@ import {loadNavbarSection} from "./sections/navbar.js";
  * ./sections/header.js and ./sections/navbar.js) — app.js just
  * loads them, then handles everything else on the page: section
  * sizing, carousels, the news feature, the emblem wheel, the
- * lyrics scrollbar, and the marquee.
+ * lyrics scrollbar, the marquee, and — via ./effects/ — the
+ * cross-page scroll-reveal, hover/tilt/ripple, and scroll-progress
+ * / scrollspy effects.
  */
 
 document.addEventListener('DOMContentLoaded', async () => {
 
   await loadHeaderSection();
   await loadNavbarSection();
+
+  // Page-wide dynamic effects. These are attribute-driven (data-reveal,
+  // data-tilt, data-ripple) so they apply automatically to whatever's
+  // marked up in index.html without any section-specific code here.
+  await loadScrollReveal();
+  await loadPageProgress();
+  loadInteractiveFx();
 
   const header = document.getElementById('site-header');
   const sections = document.querySelectorAll('.screen-section');
