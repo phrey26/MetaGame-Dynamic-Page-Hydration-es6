@@ -1,4 +1,3 @@
-
 function injectNavbarFxStyles() {
   if (document.getElementById('navbar-fx-styles')) return;
 
@@ -7,7 +6,6 @@ function injectNavbarFxStyles() {
   style.textContent = `
     @media (prefers-reduced-motion: no-preference) {
 
-      /* Nav links lift slightly on hover/focus */
       .nav-fx-link {
         transition: transform 0.2s ease, box-shadow 0.2s ease;
       }
@@ -17,7 +15,6 @@ function injectNavbarFxStyles() {
         box-shadow: 0 8px 16px -8px rgba(0, 0, 0, 0.45);
       }
 
-      /* Join MetaGames CTA — soft attention pulse */
       @keyframes ctaPulseRing {
         0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.55); }
         50%      { box-shadow: 0 0 0 9px rgba(239, 68, 68, 0); }
@@ -26,7 +23,6 @@ function injectNavbarFxStyles() {
         animation: ctaPulseRing 2.4s ease-out infinite;
       }
 
-      /* Hamburger icon morphs into an X */
       #mobile-menu-btn span {
         transition: transform 0.3s ease, opacity 0.3s ease;
       }
@@ -41,33 +37,117 @@ function injectNavbarFxStyles() {
         transform: translateY(-7px) rotate(-45deg);
       }
 
-      /* Mobile menu slides + fades open, links cascade in */
-      #mobile-menu {
-        overflow: hidden;
-        max-height: 0;
+      #mobile-menu-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 40;
         opacity: 0;
-        transform: translateY(-8px);
         pointer-events: none;
-        transition: max-height 0.35s ease, opacity 0.25s ease, transform 0.3s ease;
+        transition: opacity 0.3s ease;
+      }
+      #mobile-menu-overlay.menu-open {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      #mobile-menu {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 50;
+        width: 78%;
+        max-width: 320px;
+        display: flex;
+        flex-direction: column;
+        background: linear-gradient(180deg, #1d4ed8 0%, #1e3a8a 60%, #172554 100%);
+        transform: translateX(100%);
+        transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+        overflow: hidden;
+        box-shadow: -12px 0 32px -8px rgba(0, 0, 0, 0.5);
       }
       #mobile-menu.menu-open {
-        max-height: 32rem;
-        opacity: 1;
-        transform: translateY(0);
-        pointer-events: auto;
+        transform: translateX(0);
+      }
+
+      #mobile-menu .nav-fx-link.nav-active {
+        background-color: transparent;
+        color: inherit;
+      }
+
+      #navbar-mobile-links {
+        flex: 1 1 auto;
+        overflow-y: auto;
+      }
+      #navbar-mobile-links > a {
+        border-top-width: 0 !important;
+      }
+
+      #mobile-menu [data-nav-cta] {
+        flex-shrink: 0;
+        display: block;
+        width: fit-content;
+        margin: 0.9rem auto 1.1rem;
+        text-align: center;
+        padding: 0.55rem 1.5rem;
+        border-radius: 9999px;
+        background: #dc2626;
+        color: #fff;
+        font-weight: 700;
+        font-size: 0.875rem;
+      }
+      #mobile-menu [data-nav-cta]:hover {
+        background: #b91c1c;
+      }
+
+      #mobile-menu-close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        width: 2.25rem;
+        height: 2.25rem;
+        background: transparent;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.4rem;
+        line-height: 1;
+        border: none;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+      }
+      #mobile-menu-close:hover {
+        transform: rotate(90deg);
+      }
+
+      #navbar-mobile-links {
+        padding-top: 3.5rem;
       }
       #mobile-menu a {
         opacity: 0;
-        transform: translateY(-6px);
-        transition: opacity 0.3s ease, transform 0.3s ease;
+        transform: translateX(24px);
+        transition: opacity 0.35s ease, transform 0.35s ease;
       }
       #mobile-menu.menu-open a {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateX(0);
       }
       ${Array.from({ length: 10 }, (_, i) =>
-        `#mobile-menu.menu-open a:nth-child(${i + 1}) { transition-delay: ${i * 40}ms; }`
+        `#mobile-menu.menu-open a:nth-child(${i + 1}) { transition-delay: ${i * 45}ms; }`
       ).join('\n      ')}
+
+      body.mobile-menu-locked {
+        overflow: hidden;
+      }
+
+      @media (min-width: 768px) {
+        #mobile-menu,
+        #mobile-menu-overlay {
+          display: none !important;
+        }
+      }
     }
   `;
   document.head.appendChild(style);
@@ -118,8 +198,6 @@ async function hydrateNavbar() {
     const data = await res.json();
     renderNavbar(data);
   } catch (err) {
-    // Fetch failed — the static markup already in the page is left
-    // untouched, so the navbar still renders, just not data-driven.
     console.error('[navbar] falling back to static markup —', err);
   }
 }
@@ -128,34 +206,52 @@ function initMobileMenu() {
   const mobileMenuBtn = document.getElementById('mobile-menu-btn');
   const mobileMenu = document.getElementById('mobile-menu');
   const header = document.getElementById('site-header');
-  const MENU_TRANSITION_MS = 350;
-  let menuCloseTimer = null;
 
   if (!mobileMenuBtn || !mobileMenu) return;
 
+  mobileMenu.classList.remove('hidden');
+
+  if (mobileMenu.parentElement !== document.body) {
+    document.body.appendChild(mobileMenu);
+  }
+
+  let overlay = document.getElementById('mobile-menu-overlay');
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.id = 'mobile-menu-overlay';
+    document.body.appendChild(overlay);
+  }
+
+  let closeBtn = document.getElementById('mobile-menu-close');
+  if (!closeBtn) {
+    closeBtn = document.createElement('button');
+    closeBtn.id = 'mobile-menu-close';
+    closeBtn.type = 'button';
+    closeBtn.setAttribute('aria-label', 'Close menu');
+    closeBtn.innerHTML = '&times;';
+    mobileMenu.prepend(closeBtn);
+  }
+
+  const ctaLink = mobileMenu.querySelector('[data-nav-cta]');
+  if (ctaLink && ctaLink.parentElement !== mobileMenu) {
+    mobileMenu.appendChild(ctaLink);
+  }
+
   function openMobileMenu() {
-    clearTimeout(menuCloseTimer);
     if (header) header.classList.remove('header-hidden');
-    mobileMenu.classList.remove('hidden');
-    // Double rAF: let 'hidden' (display:none) clear and paint once in the
-    // collapsed fx state, THEN add menu-open so the transition actually runs.
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        mobileMenu.classList.add('menu-open');
-      });
-    });
+    mobileMenu.classList.add('menu-open');
+    overlay.classList.add('menu-open');
     mobileMenuBtn.classList.add('menu-open');
     mobileMenuBtn.setAttribute('aria-expanded', 'true');
+    document.body.classList.add('mobile-menu-locked');
   }
 
   function closeMobileMenu() {
-    clearTimeout(menuCloseTimer);
     mobileMenu.classList.remove('menu-open');
-    menuCloseTimer = setTimeout(() => {
-      mobileMenu.classList.add('hidden');
-    }, MENU_TRANSITION_MS);
+    overlay.classList.remove('menu-open');
     mobileMenuBtn.classList.remove('menu-open');
     mobileMenuBtn.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('mobile-menu-locked');
   }
 
   mobileMenuBtn.addEventListener('click', () => {
@@ -168,6 +264,13 @@ function initMobileMenu() {
     window.dispatchEvent(new Event('resize'));
   });
 
+  closeBtn.addEventListener('click', () => {
+    closeMobileMenu();
+    window.dispatchEvent(new Event('resize'));
+  });
+
+  overlay.addEventListener('click', closeMobileMenu);
+
   mobileMenu.querySelectorAll('a').forEach((link) => {
     link.addEventListener('click', () => {
       closeMobileMenu();
@@ -175,13 +278,15 @@ function initMobileMenu() {
     });
   });
 
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && mobileMenu.classList.contains('menu-open')) closeMobileMenu();
+  });
+
   window.addEventListener('resize', () => {
     if (window.innerWidth >= 768) closeMobileMenu();
   });
 }
 
-// Nav link hover-lift + CTA pulse — marker classes only (see injected
-// fx styles above); no Tailwind config changes required.
 function initNavFx() {
   document.querySelectorAll('#site-header nav a, #mobile-menu a').forEach((link) => {
     link.classList.add('nav-fx-link');
@@ -195,8 +300,6 @@ export async function loadNavbarSection() {
   injectNavbarFxStyles();
   await hydrateNavbar();
 
-  // Nav content is now in place — recalculate header height / section
-  // sizing, in case link text length changed how the nav wraps.
   window.dispatchEvent(new Event('resize'));
 
   initMobileMenu();
