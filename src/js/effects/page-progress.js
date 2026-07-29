@@ -158,7 +158,7 @@ function initScrollspy() {
       .filter((entry) => entry.isIntersecting)
       .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
     if (visible) setActive(visible.target);
-  }, { threshold: [0.25, 0.5, 0.75], rootMargin: '-30% 0px -40% 0px' });
+  }, { threshold: Array.from({ length: 21 }, (_, i) => i / 20), rootMargin: '-30% 0px -40% 0px' });
 
   linkGroups.forEach((_, target) => observer.observe(target));
 }
