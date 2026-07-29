@@ -1,15 +1,3 @@
-/**
- * ---------------------------------------------------------------
- * Interactive hover/click effects: tilt + cursor glow, ripple
- * ---------------------------------------------------------------
- * Marker-attribute driven, same pattern as scroll-reveal.js:
- *   data-tilt                 pointer-tracked 3D tilt + cursor glow
- *   data-tilt-max="8"         optional, max tilt in degrees
- *   data-ripple                material-style click ripple
- * No section-specific logic lives here — cards, buttons, and
- * images across the whole page opt in just by carrying the
- * attribute, so this file never needs to change as the page grows.
- */
 
 const DEFAULT_MAX_TILT = 8;
 

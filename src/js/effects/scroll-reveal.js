@@ -1,18 +1,3 @@
-/**
- * ---------------------------------------------------------------
- * Scroll-reveal effect
- * ---------------------------------------------------------------
- * Fades/slides elements in as they scroll into view. Fully
- * attribute-driven: tag any element with `data-reveal="fade-up"`
- * (or fade-down / fade-left / fade-right / zoom-in / fade-in) and
- * it's picked up automatically — nothing in this file needs to
- * change to add more elements elsewhere on the page. Optional
- * `data-reveal-delay="150"` staggers a group.
- *
- * Timing/threshold is loaded from data/effects.json (same
- * data-driven pattern header.js uses for data/header.json), with
- * sane fallbacks if that fetch fails.
- */
 
 const DEFAULT_CONFIG = {
   threshold: 0.15,

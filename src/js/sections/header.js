@@ -1,26 +1,5 @@
-/**
- * ---------------------------------------------------------------
- * Header section: hydration + scroll behavior
- * ---------------------------------------------------------------
- * Owns everything about the sticky top stripe bar and the
- * site-header's scroll hide/reveal + elevation shadow. Fully
- * self-contained — fetches header.json itself and falls back to
- * the static markup already in the page if that fetch fails.
- *
- * Effects and colors are exactly what shipped before; only
- * relocated here so header concerns live in one place.
- */
 
-/**
- * header.json ships raw Tailwind class names (e.g. "bg-brand-green")
- * so the color stripe is data-driven, and that class name is still
- * applied to each segment (useful once/if the theme defines those
- * colors). But relying on the class ALONE means the stripe silently
- * disappears the moment a class like "bg-brand-green" isn't defined
- * in the consuming project's Tailwind theme — exactly what happened.
- * This map resolves the same class names to real paint values so the
- * stripe renders correctly regardless of the Tailwind build.
- */
+
 const HEADER_STRIPE_COLOR_MAP = {
   'bg-brand-green': '#16a34a',
   'bg-brand-blue': '#2563eb',
@@ -38,16 +17,7 @@ const headerScrollConfig = {
   revealThreshold: 72
 };
 
-/**
- * These are plain CSS keyframes/rules injected at runtime instead of
- * Tailwind utility classes, on purpose: Tailwind only compiles classes
- * it can see as literal text in a scanned source file at build time.
- * Anything applied dynamically here (scroll state) needs real CSS
- * that exists regardless of the Tailwind build.
- *
- * Scope is strictly the sticky top stripe bar and the site-header's
- * scroll hide/reveal + elevation shadow.
- */
+
 function injectHeaderFxStyles() {
   if (document.getElementById('header-fx-styles')) return;
 

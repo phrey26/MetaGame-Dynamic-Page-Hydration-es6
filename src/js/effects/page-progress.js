@@ -1,20 +1,3 @@
-/**
- * ---------------------------------------------------------------
- * Page-level scroll chrome: progress bar, back-to-top, scrollspy
- * ---------------------------------------------------------------
- * These all key off overall scroll position or which section is in
- * view rather than any single section, so they live at the app
- * level instead of inside header.js or navbar.js.
- *
- * Scrollspy toggles a `.nav-active` class on the nav links that
- * navbar.js already rendered ([data-nav-index]) — it only ever
- * reads that markup, never navbar.js or navbar.json themselves.
- *
- * The progress bar and back-to-top button are created here at
- * runtime rather than living in index.html, so they stay fully
- * self-contained (same "owns its own DOM + styles" approach as
- * header.js / navbar.js).
- */
 
 async function loadPageFxConfig() {
   try {

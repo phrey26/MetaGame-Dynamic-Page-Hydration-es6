@@ -1,23 +1,4 @@
-/**
- * ---------------------------------------------------------------
- * Navbar section: hydration + behavior
- * ---------------------------------------------------------------
- * Owns everything about the nav bar: rendering it from navbar.json
- * (logo, links, CTA), the mobile menu open/close logic, and the
- * nav-link hover-lift / CTA pulse / hamburger morph / mobile-menu
- * slide effects. Fully self-contained — fetches navbar.json itself
- * and falls back to the static markup already in the page if that
- * fetch fails.
- *
- * Effects and colors are exactly what shipped before; only
- * relocated here so navbar concerns live in one place.
- */
 
-/**
- * Same rationale as header.js's style injector: these need to be
- * real CSS (not just Tailwind utility classes) because they're
- * driven by classes toggled at runtime (menu-open, stagger delays).
- */
 function injectNavbarFxStyles() {
   if (document.getElementById('navbar-fx-styles')) return;
 
@@ -92,13 +73,7 @@ function injectNavbarFxStyles() {
   document.head.appendChild(style);
 }
 
-/**
- * navbar.json drives the logo, the 8 nav links, and the CTA. The
- * existing markup already has the right structure/classes (including
- * one-off touches like the bold "Home" link and the "News" red dot) —
- * hydration only ever swaps href/text via data-nav-* hooks, so those
- * one-offs are untouched regardless of what the JSON contains.
- */
+
 function renderNavLinks(links) {
   if (!Array.isArray(links)) return;
   links.forEach((link, i) => {

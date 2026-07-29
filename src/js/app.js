@@ -4,18 +4,6 @@ import {loadScrollReveal} from "./effects/scroll-reveal.js";
 import {loadInteractiveFx} from "./effects/interactive-fx.js";
 import {loadPageProgress} from "./effects/page-progress.js";
 
-/**
- * ---------------------------------------------------------------
- * App bootstrap + shared page layout/behavior
- * ---------------------------------------------------------------
- * Header and navbar are fully self-contained sections (see
- * ./sections/header.js and ./sections/navbar.js) — app.js just
- * loads them, then handles everything else on the page: section
- * sizing, carousels, the news feature, the emblem wheel, the
- * lyrics scrollbar, the marquee, and — via ./effects/ — the
- * cross-page scroll-reveal, hover/tilt/ripple, and scroll-progress
- * / scrollspy effects.
- */
 
 document.addEventListener('DOMContentLoaded', async () => {
 
