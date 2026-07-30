@@ -50,7 +50,7 @@
     </div>
 
     <div class="hidden sm:block shrink-0">
-      <a data-nav-cta href="#join" class="bg-[#ef4444] hover:bg-red-600 transition text-white px-6 py-2 rounded-full font-bold shadow-md whitespace-nowrap"><span data-nav-cta-text>Join MetaGames</span></a>
+      <a data-nav-cta data-magnetic data-magnetic-strength="0.3" href="#join" class="bg-[#ef4444] hover:bg-red-600 transition text-white px-6 py-2 rounded-full font-bold shadow-md shadow-red-900/40 hover:shadow-lg hover:shadow-red-600/50 whitespace-nowrap"><span data-nav-cta-text>Join MetaGames</span></a>
     </div>
 
     <button id="mobile-menu-btn" class="md:hidden flex flex-col justify-center items-center gap-1.5 w-9 h-9 shrink-0" aria-label="Toggle menu" aria-expanded="false">
@@ -100,21 +100,21 @@
     </p>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-5xl mb-12">
-      <div data-reveal="fade-up" data-tilt data-tilt-max="6" class="bg-white text-slate-800 rounded-3xl p-5 shadow-xl hover:-translate-y-1 transition transform duration-300 flex flex-col">
+      <div data-reveal="fade-up" data-tilt data-tilt-max="6" data-shine class="bg-white text-slate-800 rounded-3xl p-5 shadow-xl hover:-translate-y-1 hover:shadow-2xl transition transform duration-300 flex flex-col">
         <div class="h-44 w-full flex items-center justify-center mb-4">
           <img src="assets/IMAGES/18.png" class="max-h-full object-contain" alt="Learn what MetaGames is">
         </div>
         <button data-ripple class="w-full bg-[#2563eb] hover:bg-blue-600 text-white py-3.5 rounded-xl font-bold shadow-md mt-auto">Learn What MetaGames Is</button>
       </div>
 
-      <div data-reveal="fade-up" data-reveal-delay="120" data-tilt data-tilt-max="6" class="bg-white text-slate-800 rounded-3xl p-5 shadow-xl hover:-translate-y-1 transition transform duration-300 flex flex-col">
+      <div data-reveal="fade-up" data-reveal-delay="120" data-tilt data-tilt-max="6" data-shine class="bg-white text-slate-800 rounded-3xl p-5 shadow-xl hover:-translate-y-1 hover:shadow-2xl transition transform duration-300 flex flex-col">
         <div class="h-44 w-full flex items-center justify-center mb-4">
           <img src="assets/IMAGES/1.png" class="max-h-full object-contain" alt="Explore sports and games">
         </div>
         <button data-ripple class="w-full bg-[#2563eb] hover:bg-blue-600 text-white py-3.5 rounded-xl font-bold shadow-md mt-auto">Explore Sports &amp; Games</button>
       </div>
 
-      <div data-reveal="fade-up" data-reveal-delay="240" data-tilt data-tilt-max="6" class="bg-white text-slate-800 rounded-3xl p-5 shadow-xl hover:-translate-y-1 transition transform duration-300 flex flex-col">
+      <div data-reveal="fade-up" data-reveal-delay="240" data-tilt data-tilt-max="6" data-shine class="bg-white text-slate-800 rounded-3xl p-5 shadow-xl hover:-translate-y-1 hover:shadow-2xl transition transform duration-300 flex flex-col">
         <div class="h-44 w-full flex items-center justify-center mb-4">
           <img src="assets/IMAGES/2.png" class="max-h-full object-contain" alt="Join the movement">
         </div>
@@ -340,7 +340,7 @@
 
     <div class="relative w-full flex flex-col items-center sm:grid sm:grid-cols-1">
 
-      <div data-reveal="zoom-in" class="relative sm:col-start-1 sm:row-start-1 sm:self-center sm:justify-self-start w-40 h-40 sm:w-56 sm:h-56 md:w-72 md:h-72 rounded-full shrink-0 overflow-hidden shadow-xl z-20 -mb-6 sm:mb-0">
+      <div id="emblem-wheel-frame" data-reveal="zoom-in" class="relative sm:col-start-1 sm:row-start-1 sm:self-center sm:justify-self-start w-40 h-40 sm:w-56 sm:h-56 md:w-72 md:h-72 rounded-full shrink-0 overflow-hidden shadow-xl z-20 -mb-6 sm:mb-0 transition-shadow duration-700 ease-out">
         <div id="emblem-wheel" class="emblem-wheel-spin absolute inset-0" style="background: conic-gradient(#dc2626 0deg 60deg, #facc15 60deg 120deg, #ffffff 120deg 180deg, #16a34a 180deg 240deg, #2563eb 240deg 300deg, #111827 300deg 360deg);"></div>
         <div class="absolute inset-[14%] rounded-full bg-white flex items-center justify-center p-2 shadow-lg">
           <img src="assets/IMAGES/LOGO.png" onerror="this.outerHTML='<div class=\'img-fallback w-full h-full rounded-full\'>Logo</div>'" class="w-full h-full object-contain rounded-full" alt="MetaGames emblem center logo">
@@ -353,17 +353,17 @@
         </svg>
       </div>
 
-      <div data-reveal="fade-left" data-reveal-delay="100" class="bg-gradient-to-r from-blue-900 via-blue-700 to-blue-500 rounded-2xl flex flex-col sm:flex-row items-center gap-4 sm:gap-6 p-5 sm:pl-[17rem] md:pl-[22rem] sm:pr-6 md:pr-10 sm:py-8 w-full sm:col-start-1 sm:row-start-1 sm:self-center">
+      <div id="emblem-panel" data-reveal="fade-left" data-reveal-delay="100" class="bg-blue-700 text-white rounded-2xl flex flex-col sm:flex-row items-center gap-4 sm:gap-6 p-5 sm:pl-[17rem] md:pl-[22rem] sm:pr-6 md:pr-10 sm:py-8 w-full sm:col-start-1 sm:row-start-1 sm:self-center transition-all duration-700 ease-out">
         <div class="min-w-0 flex-1 text-center sm:text-left">
           <p id="emblem-color" class="font-bold text-2xl sm:text-3xl leading-tight">Green</p>
-          <p id="emblem-meaning" class="text-sm sm:text-base text-slate-100">Multi-Cultural Sports</p>
+          <p id="emblem-meaning" class="text-sm sm:text-base text-slate-100 transition-colors duration-700 ease-out">Multi-Cultural Sports</p>
           <p class="italic font-semibold text-sm sm:text-lg mt-3 sm:mt-4">One symbol. Many sports. One global community.</p>
         </div>
         <div class="flex gap-3 sm:gap-4 shrink-0">
-          <button id="emblem-prev" data-ripple aria-label="Previous color" class="w-9 h-9 sm:w-11 sm:h-11 bg-white text-blue-800 rounded-full flex items-center justify-center shadow hover:bg-slate-100 hover:scale-110 transition">
+          <button id="emblem-prev" data-ripple aria-label="Previous color" class="w-9 h-9 sm:w-11 sm:h-11 bg-white text-blue-800 rounded-full flex items-center justify-center shadow hover:bg-slate-100 hover:scale-110 transition-transform transition-colors duration-300">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
           </button>
-          <button id="emblem-next" data-ripple aria-label="Next color" class="w-9 h-9 sm:w-11 sm:h-11 bg-white text-blue-800 rounded-full flex items-center justify-center shadow hover:bg-slate-100 hover:scale-110 transition">
+          <button id="emblem-next" data-ripple aria-label="Next color" class="w-9 h-9 sm:w-11 sm:h-11 bg-white text-blue-800 rounded-full flex items-center justify-center shadow hover:bg-slate-100 hover:scale-110 transition-transform transition-colors duration-300">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"></polyline></svg>
           </button>
         </div>
@@ -432,13 +432,13 @@
   <div class="bg-[#0b1120] px-6 sm:px-12 md:px-16 py-8 sm:py-10">
     <h4 data-reveal="fade-up" class="font-bold text-lg sm:text-xl text-white mb-4 sm:mb-5">Host Cities:</h4>
     <div class="max-w-4xl mx-auto grid grid-cols-2 gap-5 sm:gap-8">
-      <div data-reveal="fade-up" data-tilt data-tilt-max="6" class="relative aspect-[4/3] rounded-xl overflow-hidden shadow-lg">
-        <img src="assets/IMAGES/20.png" onerror="this.outerHTML='<div class=\'img-fallback h-full w-full\'>Image</div>'" class="w-full h-full object-cover" alt="Manila, Philippines">
+      <div data-reveal="fade-up" data-tilt data-tilt-max="6" data-shine class="group relative aspect-[4/3] rounded-xl overflow-hidden shadow-lg">
+        <img src="assets/IMAGES/20.png" onerror="this.outerHTML='<div class=\'img-fallback h-full w-full\'>Image</div>'" class="w-full h-full object-cover transition duration-700 ease-out group-hover:scale-110" alt="Manila, Philippines">
         <div class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-blue-900/95 via-blue-900/40 to-transparent"></div>
         <div class="absolute bottom-0 left-0 right-0 text-sm sm:text-base font-bold px-3 sm:px-4 py-3 sm:py-4">Manila, Philippines</div>
       </div>
-      <div data-reveal="fade-up" data-reveal-delay="120" data-tilt data-tilt-max="6" class="relative aspect-[4/3] rounded-xl overflow-hidden shadow-lg">
-        <img src="assets/IMAGES/21.PNG" onerror="this.outerHTML='<div class=\'img-fallback h-full w-full\'>Image</div>'" class="w-full h-full object-cover" alt="Xinjiang, China">
+      <div data-reveal="fade-up" data-reveal-delay="120" data-tilt data-tilt-max="6" data-shine class="group relative aspect-[4/3] rounded-xl overflow-hidden shadow-lg">
+        <img src="assets/IMAGES/21.PNG" onerror="this.outerHTML='<div class=\'img-fallback h-full w-full\'>Image</div>'" class="w-full h-full object-cover transition duration-700 ease-out group-hover:scale-110" alt="Xinjiang, China">
         <div class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-red-900/95 via-red-900/40 to-transparent"></div>
         <div class="absolute bottom-0 left-0 right-0 text-sm sm:text-base font-bold px-3 sm:px-4 py-3 sm:py-4">Xinjiang, China</div>
       </div>
@@ -448,13 +448,13 @@
   <div class="bg-white text-slate-800 py-8 sm:py-12 text-center">
     <h4 data-reveal="fade-up" class="font-bold text-xl sm:text-2xl mb-6 sm:mb-8">Partners:</h4>
     <div class="flex justify-center items-start gap-6 sm:gap-12 md:gap-16 flex-wrap px-4">
-      <div data-reveal="zoom-in" data-tilt data-tilt-max="10" class="w-28 h-28 sm:w-36 sm:h-36 md:w-40 md:h-40 shrink-0 flex items-center justify-center grayscale hover:grayscale-0 transition duration-300">
+      <div data-reveal="zoom-in" data-tilt data-tilt-max="10" class="w-28 h-28 sm:w-36 sm:h-36 md:w-40 md:h-40 shrink-0 flex items-center justify-center grayscale hover:grayscale-0 hover:drop-shadow-[0_0_25px_rgba(37,99,235,0.45)] transition duration-300">
         <img src="assets/IMAGES/22.png" onerror="this.outerHTML='<div class=\'img-fallback w-full h-full rounded-full\'>ESWF</div>'" class="max-w-full max-h-full object-contain" alt="Esports World Federation logo">
       </div>
-      <div data-reveal="zoom-in" data-reveal-delay="100" data-tilt data-tilt-max="10" class="w-28 h-28 sm:w-36 sm:h-36 md:w-40 md:h-40 shrink-0 flex items-center justify-center grayscale hover:grayscale-0 transition duration-300">
+      <div data-reveal="zoom-in" data-reveal-delay="100" data-tilt data-tilt-max="10" class="w-28 h-28 sm:w-36 sm:h-36 md:w-40 md:h-40 shrink-0 flex items-center justify-center grayscale hover:grayscale-0 hover:drop-shadow-[0_0_25px_rgba(37,99,235,0.45)] transition duration-300">
         <img src="assets/IMAGES/23.png" onerror="this.outerHTML='<div class=\'img-fallback w-full h-full rounded-full\'>Game Sphere</div>'" class="max-w-full max-h-full object-contain" alt="Game Sphere logo">
       </div>
-      <div data-reveal="zoom-in" data-reveal-delay="200" data-tilt data-tilt-max="10" class="w-28 h-28 sm:w-36 sm:h-36 md:w-40 md:h-40 shrink-0 flex items-center justify-center grayscale hover:grayscale-0 transition duration-300">
+      <div data-reveal="zoom-in" data-reveal-delay="200" data-tilt data-tilt-max="10" class="w-28 h-28 sm:w-36 sm:h-36 md:w-40 md:h-40 shrink-0 flex items-center justify-center grayscale hover:grayscale-0 hover:drop-shadow-[0_0_25px_rgba(37,99,235,0.45)] transition duration-300">
         <img src="assets/IMAGES/24.png" onerror="this.outerHTML='<div class=\'img-fallback w-full h-full rounded-full\'>Partner</div>'" class="max-w-full max-h-full object-contain" alt="Partner logo">
       </div>
     </div>

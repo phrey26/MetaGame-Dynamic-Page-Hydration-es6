@@ -1,4 +1,3 @@
-
 const DEFAULT_MAX_TILT = 8;
 
 function injectInteractiveFxStyles() {
@@ -44,6 +43,38 @@ function injectInteractiveFxStyles() {
     @keyframes rippleFxAnim {
       to { transform: scale(2.6); opacity: 0; }
     }
+
+    @media (prefers-reduced-motion: no-preference) {
+      /* Diagonal light sweep on hover for cards/images marked data-shine */
+      [data-shine] {
+        position: relative;
+        overflow: hidden;
+      }
+      [data-shine]::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -60%;
+        width: 35%;
+        height: 100%;
+        background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+        transform: skewX(-20deg);
+        transition: left 0.65s ease;
+        pointer-events: none;
+        z-index: 5;
+      }
+      [data-shine]:hover::before,
+      [data-shine]:focus-within::before {
+        left: 130%;
+      }
+    }
+
+    /* Magnetic hover pull for buttons/links marked data-magnetic */
+    [data-magnetic] {
+      display: inline-block;
+      transition: transform 0.2s ease-out;
+      will-change: transform;
+    }
   `;
   document.head.appendChild(style);
 }
@@ -76,6 +107,26 @@ function initTilt() {
   });
 }
 
+function initMagnetic() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  document.querySelectorAll('[data-magnetic]').forEach((el) => {
+    const strength = parseFloat(el.dataset.magneticStrength) || 0.3;
+
+    el.addEventListener('pointermove', (e) => {
+      if (e.pointerType === 'touch') return;
+      const rect = el.getBoundingClientRect();
+      const relX = e.clientX - rect.left - rect.width / 2;
+      const relY = e.clientY - rect.top - rect.height / 2;
+      el.style.transform = `translate(${relX * strength}px, ${relY * strength}px)`;
+    });
+
+    el.addEventListener('pointerleave', () => {
+      el.style.transform = 'translate(0, 0)';
+    });
+  });
+}
+
 function initRipple() {
   document.querySelectorAll('[data-ripple]').forEach((el) => {
     el.addEventListener('click', (e) => {
@@ -95,5 +146,6 @@ function initRipple() {
 export function loadInteractiveFx() {
   injectInteractiveFxStyles();
   initTilt();
+  initMagnetic();
   initRipple();
 }

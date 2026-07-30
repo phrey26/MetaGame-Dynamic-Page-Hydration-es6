@@ -164,8 +164,24 @@ document.addEventListener('DOMContentLoaded', async () => {
   const emblemMeaningEl = document.getElementById('emblem-meaning');
   const emblemSwatchEl = document.getElementById('emblem-swatch');
   const emblemWheelEl = document.getElementById('emblem-wheel');
+  const emblemWheelFrameEl = document.getElementById('emblem-wheel-frame');
+  const emblemPanelEl = document.getElementById('emblem-panel');
   const emblemPrevBtn = document.getElementById('emblem-prev');
   const emblemNextBtn = document.getElementById('emblem-next');
+
+  // Small color helpers so the emblem panel/glow/arrows can track whichever
+  // wedge color is currently selected, and keep text legible on top of it.
+  function hexToRgb(hex) {
+    const clean = hex.replace('#', '');
+    const bigint = parseInt(clean, 16);
+    return { r: (bigint >> 16) & 255, g: (bigint >> 8) & 255, b: bigint & 255 };
+  }
+
+  function isLightColor(hex) {
+    const { r, g, b } = hexToRgb(hex);
+    const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+    return luminance > 0.6;
+  }
 
   const emblemWedgeDeg = 360 / emblemStops.length;
   let emblemStep = 3; 
@@ -184,6 +200,33 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (emblemMeaningEl) emblemMeaningEl.textContent = stop.meaning;
     if (emblemSwatchEl) emblemSwatchEl.style.backgroundColor = stop.hex;
     if (emblemWheelEl) emblemWheelEl.style.transform = `rotate(${rotation}deg)`;
+
+    // Info panel now matches the color the arrow is currently pointing at,
+    // instead of staying a fixed blue. Text color is set inline (not via
+    // Tailwind classes) so it always resolves correctly regardless of which
+    // utility classes happen to be present in the compiled stylesheet —
+    // white/yellow wedges get black text, the rest get white text.
+    const light = isLightColor(stop.hex);
+    const textColor = light ? '#0f172a' : '#ffffff';
+    const subTextColor = light ? '#334155' : '#e2e8f0';
+    if (emblemPanelEl) {
+      emblemPanelEl.style.backgroundColor = stop.hex;
+      emblemPanelEl.style.boxShadow = `0 20px 45px -15px ${stop.hex}99`;
+      emblemPanelEl.style.color = textColor;
+    }
+    if (emblemMeaningEl) {
+      emblemMeaningEl.style.color = subTextColor;
+    }
+
+    // Wheel gets a soft glow ring in the same color, and the prev/next
+    // arrow icons tint to match too (falling back to a dark tone for white).
+    if (emblemWheelFrameEl) {
+      emblemWheelFrameEl.style.boxShadow = `0 0 55px 12px ${stop.hex}80`;
+    }
+    const arrowColor = stop.hex.toLowerCase() === '#ffffff' ? '#0f172a' : stop.hex;
+    [emblemPrevBtn, emblemNextBtn].forEach((btn) => {
+      if (btn) btn.style.color = arrowColor;
+    });
   }
 
   if (emblemPrevBtn) {
@@ -252,6 +295,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const MARQUEE_DURATION_MS = 25000; 
     let marqueeOffset = 0;
     let marqueeLastTime = null;
+    let marqueePaused = false;
 
     function stepMarquee(timestamp) {
       if (marqueeLastTime === null) marqueeLastTime = timestamp;
@@ -259,7 +303,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       marqueeLastTime = timestamp;
 
       const loopWidth = marqueeTrack.scrollWidth / 2;
-      if (loopWidth > 0) {
+      if (loopWidth > 0 && !marqueePaused) {
         const speed = loopWidth / MARQUEE_DURATION_MS; 
         marqueeOffset += speed * delta;
         if (marqueeOffset >= loopWidth) marqueeOffset -= loopWidth;
@@ -267,6 +311,13 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
 
       requestAnimationFrame(stepMarquee);
+    }
+
+    // Let people actually read a line if they mouse over the ticker.
+    const marqueeParent = marqueeTrack.parentElement;
+    if (marqueeParent) {
+      marqueeParent.addEventListener('pointerenter', () => { marqueePaused = true; });
+      marqueeParent.addEventListener('pointerleave', () => { marqueePaused = false; });
     }
 
     requestAnimationFrame(stepMarquee);

@@ -1,4 +1,3 @@
-
 async function loadPageFxConfig() {
   try {
     const res = await fetch('effects.json', { cache: 'no-cache' });
@@ -54,7 +53,8 @@ function injectPageFxStyles(color, height) {
     }
     #back-to-top:hover { background: #1d4ed8; }
 
-    .nav-fx-link.nav-active {
+    #navbar-desktop-links a.nav-active,
+    #navbar-mobile-links a.nav-active {
       background-color: #fff;
       color: #0f172a;
     }
