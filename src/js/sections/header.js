@@ -9,9 +9,7 @@ const HEADER_STRIPE_COLOR_MAP = {
   'bg-black': '#111827'
 };
 
-// Populated from header.json's optional "scrollEffect" block — falls
-// back to these defaults if the field is missing, so the hide/reveal
-// behavior still works even against an older header.json.
+
 const headerScrollConfig = {
   hideOnScrollDown: true,
   revealThreshold: 72
@@ -112,12 +110,7 @@ async function hydrateHeader() {
   }
 }
 
-// Header hides on scroll-down past the reveal threshold, and slides
-// back in the moment you scroll up — driven by header.json's
-// scrollEffect config, with a sane default if that field is absent.
-// Stays visible while the mobile menu is open so it's never yanked
-// out from under an open menu (read straight off the DOM — no
-// dependency on navbar.js needed for that).
+
 function initHeaderScrollEffect() {
   const header = document.getElementById('site-header');
   if (!header) return;

@@ -1,0 +1,26 @@
+[
+    {
+        "img": "assets/news-featured-host-nations.jpg",
+        "alt": "MetaGames host nations announced",
+        "title": "MetaGames Host Nations Announced",
+        "desc": "Discover the countries leading the global MetaGames experience."
+    },
+    {
+        "img": "assets/news-thumb-new-categories.jpg",
+        "alt": "New sports and game categories added",
+        "title": "New Sports & Game Categories Added",
+        "desc": "Fresh disciplines have joined the roster across mind, digital, and physical sports."
+    },
+    {
+        "img": "assets/news-thumb-registration-updates.jpg",
+        "alt": "Registration updates",
+        "title": "Registration Updates",
+        "desc": "Key dates and requirements for athlete and team registration."
+    },
+    {
+        "img": "assets/news-thumb-partnerships.jpg",
+        "alt": "Official partnerships and collaborations",
+        "title": "Official Partnerships & Collaborations",
+        "desc": "MetaGames welcomes new federations and technology partners."
+    }
+]

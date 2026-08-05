@@ -1,0 +1,8 @@
+[
+    { "name": "Red", "hex": "#dc2626", "meaning": "Physical Sports" },
+    { "name": "Yellow", "hex": "#facc15", "meaning": "Mind Sports" },
+    { "name": "White", "hex": "#ffffff", "meaning": "Fair Play & Inclusivity" },
+    { "name": "Green", "hex": "#16a34a", "meaning": "Multi-Cultural Sports" },
+    { "name": "Blue", "hex": "#2563eb", "meaning": "Digital & Virtual Sports" },
+    { "name": "Black", "hex": "#111827", "meaning": "Esports" }
+]

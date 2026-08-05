@@ -1,7 +1,7 @@
 async function loadPageFxConfig() {
   try {
-    const res = await fetch('effects.json', { cache: 'no-cache' });
-    if (!res.ok) throw new Error(`effects.json responded ${res.status}`);
+    const res = await fetch('data/effects.json', { cache: 'no-cache' });
+    if (!res.ok) throw new Error(`data/effects.json responded ${res.status}`);
     const data = await res.json();
     return data.progressBar || {};
   } catch (err) {
@@ -117,7 +117,7 @@ function initScrollspy() {
   const navLinks = document.querySelectorAll('#navbar-desktop-links [data-nav-index]');
   if (!navLinks.length || !('IntersectionObserver' in window)) return;
 
-  const linkGroups = new Map(); // section element -> matching nav links (desktop + mobile)
+  const linkGroups = new Map(); 
 
   navLinks.forEach((link) => {
     const href = link.getAttribute('href') || '';

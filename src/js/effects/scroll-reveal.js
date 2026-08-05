@@ -41,8 +41,8 @@ function injectRevealStyles(distance, duration) {
 
 async function loadRevealConfig() {
   try {
-    const res = await fetch('effects.json', { cache: 'no-cache' });
-    if (!res.ok) throw new Error(`effects.json responded ${res.status}`);
+    const res = await fetch('data/effects.json', { cache: 'no-cache' });
+    if (!res.ok) throw new Error(`data/effects.json responded ${res.status}`);
     const data = await res.json();
     return { ...DEFAULT_CONFIG, ...(data.reveal || {}) };
   } catch (err) {
